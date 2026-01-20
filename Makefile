@@ -1,6 +1,6 @@
 # Variables
 DOCS_DIR = docs
-MAN_FILE = portal_pro.1
+MAN_FILE = imp.1
 MD_FILE = $(DOCS_DIR)/$(MAN_FILE).md
 
 # Default target
