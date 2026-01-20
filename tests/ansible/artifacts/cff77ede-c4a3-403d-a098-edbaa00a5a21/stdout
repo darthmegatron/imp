@@ -1,0 +1,8 @@
+[0;31m[ERROR]: YAML parsing failed: Mapping values are not allowed in this context.[0m
+[0;31mOrigin: /Users/rob.collins/GitHub/imp/tests/ansible/test.yaml:9:12[0m
+[0;31m[0m
+[0;31m7   tasks:[0m
+[0;31m8     - name: Create configuration file[0m
+[0;31m9         raw: |[0m
+[0;31m             ^ column 12[0m
+[0;31m[0m

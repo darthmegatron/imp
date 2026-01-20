@@ -1,0 +1,10 @@
+---
+- name: Configure and Restart Decoders
+  hosts: decoders
+  become: no  # This means "run as sudo"
+  gather_facts: no
+
+  tasks:
+    - name: Create configuration file
+      raw: |
+        echo "SEND_ADDRESS1=227.1.1.88:5000" > /home/rob.collins/ansible_test.txt

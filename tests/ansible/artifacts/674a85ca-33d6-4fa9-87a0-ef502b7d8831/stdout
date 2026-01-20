@@ -1,0 +1,38 @@
+
+PLAY [Configure and Restart Decoders] ******************************************
+
+TASK [Create configuration file] ***********************************************
+[0;31m[ERROR]: Task failed: Finalization of task args for 'ansible.builtin.raw' failed: Error while resolving value for '_raw_params': 'handoff_ip' is undefined[0m
+[0;31m[0m
+[0;31mTask failed.[0m
+[0;31mOrigin: /Users/rob.collins/GitHub/imp/tests/ansible/test.yaml:8:7[0m
+[0;31m[0m
+[0;31m6[0m
+[0;31m7   tasks:[0m
+[0;31m8     - name: Create configuration file[0m
+[0;31m        ^ column 7[0m
+[0;31m[0m
+[0;31m<<< caused by >>>[0m
+[0;31m[0m
+[0;31mFinalization of task args for 'ansible.builtin.raw' failed.[0m
+[0;31mOrigin: /Users/rob.collins/GitHub/imp/tests/ansible/test.yaml:9:7[0m
+[0;31m[0m
+[0;31m7   tasks:[0m
+[0;31m8     - name: Create configuration file[0m
+[0;31m9       raw: |[0m
+[0;31m        ^ column 7[0m
+[0;31m[0m
+[0;31m<<< caused by >>>[0m
+[0;31m[0m
+[0;31mError while resolving value for '_raw_params': 'handoff_ip' is undefined[0m
+[0;31mOrigin: /Users/rob.collins/GitHub/imp/tests/ansible/test.yaml:9:12[0m
+[0;31m[0m
+[0;31m7   tasks:[0m
+[0;31m8     - name: Create configuration file[0m
+[0;31m9       raw: |[0m
+[0;31m             ^ column 12[0m
+[0;31m[0m
+[0;31mfatal: [ltnt-col-lowcost1]: FAILED! => {"changed": false, "msg": "Task failed: Finalization of task args for 'ansible.builtin.raw' failed: Error while resolving value for '_raw_params': 'handoff_ip' is undefined"}[0m
+
+PLAY RECAP *********************************************************************
+[0;31mltnt-col-lowcost1[0m          : ok=0    changed=0    unreachable=0    [0;31mfailed=1   [0m skipped=0    rescued=0    ignored=0   

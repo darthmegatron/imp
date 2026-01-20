@@ -1,0 +1,24 @@
+
+PLAY [Configure and Restart Decoders] ******************************************
+
+TASK [Gathering Facts] *********************************************************
+[1;35m[WARNING]: sftp transfer mechanism failed on [ltnt-col-lowcost1.livetimenet.net]. Use ANSIBLE_DEBUG=1 to see detailed information[0m
+[1;35m[WARNING]: scp transfer mechanism failed on [ltnt-col-lowcost1.livetimenet.net]. Use ANSIBLE_DEBUG=1 to see detailed information[0m
+[0;31m[ERROR]: Task failed: Action failed: The following modules failed to execute: ansible.legacy.setup.[0m
+[0;31m[0m
+[0;31mTask failed: Action failed.[0m
+[0;31m[0m
+[0;31m<<< caused by >>>[0m
+[0;31m[0m
+[0;31mThe following modules failed to execute: ansible.legacy.setup.[0m
+[0;31m[0m
+[0;31m+--[ Sub-Event 1 of 1 ]---[0m
+[0;31m| [0m
+[0;31m| Module result deserialization failed: No start of json char found See stdout/stderr for the returned output.[0m
+[0;31m| [0m
+[0;31m+--[ End Sub-Event ]---[0m
+[0;31m[0m
+[0;31mfatal: [ltnt-col-lowcost1]: FAILED! => {"ansible_facts": {}, "changed": false, "failed_modules": {"ansible.legacy.setup": {"exception": "(traceback unavailable)", "failed": true, "module_stderr": "Shared connection to ltnt-col-lowcost1.livetimenet.net closed.\r\n", "module_stdout": "  File \"/home/rob.collins/.ansible/tmp/ansible-tmp-1768887530.239242-71170-189956615015548/AnsiballZ_setup.py\", line 3\r\n    from __future__ import annotations\r\n    ^\r\nSyntaxError: future feature annotations is not defined\r\n", "msg": "Module result deserialization failed: No start of json char found", "rc": 1}}, "msg": "The following modules failed to execute: ansible.legacy.setup."}[0m
+
+PLAY RECAP *********************************************************************
+[0;31mltnt-col-lowcost1[0m          : ok=0    changed=0    unreachable=0    [0;31mfailed=1   [0m skipped=0    rescued=0    ignored=0   

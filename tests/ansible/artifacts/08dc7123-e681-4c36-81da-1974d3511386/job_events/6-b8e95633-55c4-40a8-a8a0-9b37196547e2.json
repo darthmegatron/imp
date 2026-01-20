@@ -1,0 +1,1 @@
+{"event": "verbose", "uuid": "b8e95633-55c4-40a8-a8a0-9b37196547e2", "counter": 6, "stdout": "\u001b[1;35m[WARNING]: scp transfer mechanism failed on [ltnt-col-lowcost1.livetimenet.net]. Use ANSIBLE_DEBUG=1 to see detailed information\u001b[0m", "start_line": 5, "end_line": 6, "runner_ident": "08dc7123-e681-4c36-81da-1974d3511386", "created": "2026-01-20T05:42:00.719746+00:00"}

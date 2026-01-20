@@ -1,0 +1,1 @@
+{"event": "verbose", "uuid": "f0581daa-c789-4bea-972d-4aa0e668f2d0", "counter": 2, "stdout": "\u001b[0;31mOrigin: /Users/rob.collins/GitHub/imp/tests/ansible/test.yaml:9:12\u001b[0m", "start_line": 1, "end_line": 2, "runner_ident": "cff77ede-c4a3-403d-a098-edbaa00a5a21", "created": "2026-01-20T05:45:06.029517+00:00"}

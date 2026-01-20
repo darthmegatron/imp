@@ -1,0 +1,6 @@
+[1;35m[WARNING]: Could not match supplied host pattern, ignoring: decoders[0m
+
+PLAY [Configure and Restart Decoders] ******************************************
+[0;36mskipping: no hosts matched[0m
+
+PLAY RECAP *********************************************************************

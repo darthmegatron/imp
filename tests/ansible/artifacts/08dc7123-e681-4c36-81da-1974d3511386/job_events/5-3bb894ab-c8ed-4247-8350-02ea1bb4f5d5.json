@@ -1,0 +1,1 @@
+{"event": "verbose", "uuid": "3bb894ab-c8ed-4247-8350-02ea1bb4f5d5", "counter": 5, "stdout": "\u001b[1;35m[WARNING]: sftp transfer mechanism failed on [ltnt-col-lowcost1.livetimenet.net]. Use ANSIBLE_DEBUG=1 to see detailed information\u001b[0m", "start_line": 4, "end_line": 5, "runner_ident": "08dc7123-e681-4c36-81da-1974d3511386", "created": "2026-01-20T05:42:00.718343+00:00"}
