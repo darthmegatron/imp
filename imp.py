@@ -23,8 +23,11 @@ class Colors:
 
 BASE_URL = "https://transport.api.ltnglobal.com/v1/"
 #script_host = subprocess.run('hostname', stdout=subprocess.PIPE, text=True).stdout.strip()
+if Path('/var/lib/transport-api/api-key.json').exists():
+    key_path = Path('/var/lib/transport-api/api-key.json')
+else:
+    key_path = Path.home() / "Documents" / "api-key.json"
 
-key_path = Path.home() / "Documents" / "api-key.json"
 with key_path.open() as f:
     key_data = json.load(f)
     api_key = key_data["api_key"]
