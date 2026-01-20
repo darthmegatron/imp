@@ -19,7 +19,7 @@ Run the program with a specific config:
     $ imp.py --create-decoder-confs ltnr-bwi-rcollins
 
 # BUGS
-See GitHub Issues: <https://github.com/user/repo/issues>
+See GitHub Issues: <https://github.com/darthmegatron/imp/issues>
 
 # AUTHOR
-Robert Collins <robert.collins@ltnglobal.com>
+Robert Collins <randomhuman-rc@proton.me>
