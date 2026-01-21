@@ -54,7 +54,7 @@ class Leaf(Component):
 {mcast_port}")
             except Exception as e:
                 print(f"Failure: {e}")
-        print(f"Success: decoder confs have been created at {base_dir}")
+        print(f"Success: {len(self.info)} decoder confs have been created at {base_dir}")
 
 
 class Endpoint(Component):
