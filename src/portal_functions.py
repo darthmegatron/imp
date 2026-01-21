@@ -93,4 +93,28 @@ class Flowclient(Component):
         }
         self.info = self.session.get(self.url,\
             params=self.search_filter).json()#["leaves"]
-            
+
+
+class Hardware(Component):
+    def __init__(self, name, session, filter_by):
+        super().__init__(name, session)
+        self.url = urljoin(BASE_URL, "hardware")
+        self.filter_by = filter_by
+        self.search_filter = {
+            "filter": f"{self.filter_by}=\'{self.name}\'",
+            "page_size": 999999
+        }
+        self.info = self.session.get(self.url, params=self.search_filter).json()#["endpoint"][0]
+
+
+class Appliances(Component):
+    def __init__(self, name, session, filter_by):
+        super().__init__(name, session)
+        self.url = urljoin(BASE_URL, "appliances")
+        self.filter_by = filter_by
+        self.search_filter = {
+            "filter": f"{self.filter_by}=\'{self.name}\'",
+            "page_size": 999999
+        }
+        self.info = self.session.get(self.url, params=self.search_filter).json()#["endpoint"][0]
+
