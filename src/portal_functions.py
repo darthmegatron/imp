@@ -40,21 +40,24 @@ class Leaf(Component):
 
         base_dir.mkdir(parents=True, exist_ok=True)
 
+        count = 0
+
         for decoder in self.info:
             try:
                 if '8' in decoder['tag_ids'] and decoder['leaf_type'] == 'DEST':
                     decoder_num = decoder['leaf_id'].split('-d')[-1]
                     filename = f"decoder{decoder_num}.conf"
 
-                    file_path = base_dir / filename
+                    file_path = Path(base_dir / filename)
+                    file_path.chmod(0o664)
+
                     mcast_addr = decoder['transport_handoff_ip']
                     mcast_port = decoder['transport_handoff_port']
-                    with open(file_path, 'w') as decoder_file:
-                        decoder_file.write(f"SEND_ADDRESS1={mcast_addr}:\
-{mcast_port}")
+                    count += 1
+                    file_path.write_text(f"SEND_ADDRESS1={mcast_addr}:{mcast_port}")
             except Exception as e:
                 print(f"Failure: {e}")
-        print(f"Success: {len(self.info)} decoder confs have been created at {base_dir}")
+        print(f"Success: {count} decoder confs have been created at {base_dir}")
 
 
 class Endpoint(Component):
