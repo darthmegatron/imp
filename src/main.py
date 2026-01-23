@@ -23,7 +23,7 @@ class Colors:
 
 def main():
 
-    BASE_URL = "https://transport.api.ltnglobal.com/v1/"
+    BASE_URL = pf.Component.BASE_URL
     #script_host = subprocess.run('hostname', stdout=subprocess.PIPE, text=True).stdout.strip()
     if Path('/var/lib/transport-api/api-key.json').exists():
         key_path = Path('/var/lib/transport-api/api-key.json')

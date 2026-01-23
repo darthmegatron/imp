@@ -3,121 +3,124 @@ from urllib.parse import urljoin
 from pathlib import Path
 
 
-BASE_URL = "https://transport.api.ltnglobal.com/v1/"
-
-
 class Component:
+    BASE_URL = "https://transport.api.ltnglobal.com/v1/"
+    _json_key = None
+
     def __init__(self, name, session):
         self.name = name
         self.session = session
+        self.url = urljoin(self.BASE_URL, self._json_key)
+
+    def get_info(self):
+        if self._json_key:
+            return self.session.get(self.url, params=self.search_filter).json()[self._json_key]
+        else:
+            return self.session.get(self.url, params=self.search_filter).json()
+
 
 
 class Channel(Component):
+    _json_key = "channels"
+
     def __init__(self, name, session):
         super().__init__(name, session)
-        self.url = urljoin(BASE_URL, "channels")
         self.search_filter = {
             "filter": f'channel_id=\'{self.name}\'',
             "page_size": 999999
         }
-        self.info = self.session.get(self.url, params=self.search_filter).json()["channels"][0]
 
 
 class Leaf(Component):
+    _json_key = "leaves"
+
     def __init__(self, name, session, filter_by):
         super().__init__(name, session)
         self.filter_by = filter_by
-        self.url = urljoin(BASE_URL, "leaves")
         self.search_filter = {
             "filter": f'{self.filter_by}=\'{self.name}\'',
             "page_size": 999999
         }
-        self.info = self.session.get(self.url,\
-            params=self.search_filter).json()["leaves"]
 
     def create_decoder_confs(self):
-        base_dir = Path.home() / "decoder_confs" / self.info[0]['endpoint_id']
+        base_dir = Path.home() / "decoder_confs" / self.get_info()[0]['endpoint_id']
 
         base_dir.mkdir(parents=True, exist_ok=True)
 
         count = 0
 
-        for decoder in self.info:
+        for decoder in self.get_info():
             try:
                 if '8' in decoder['tag_ids'] and decoder['leaf_type'] == 'DEST':
                     decoder_num = decoder['leaf_id'].split('-d')[-1]
                     filename = f"decoder{decoder_num}.conf"
 
-                    file_path = Path(base_dir / filename)
-                    file_path.chmod(0o664)
+                    file_path = base_dir / filename
 
                     mcast_addr = decoder['transport_handoff_ip']
                     mcast_port = decoder['transport_handoff_port']
                     count += 1
                     file_path.write_text(f"SEND_ADDRESS1={mcast_addr}:{mcast_port}")
+                    Path(file_path).chmod(0o664)
             except Exception as e:
                 print(f"Failure: {e}")
         print(f"Success: {count} decoder confs have been created at {base_dir}")
 
 
 class Endpoint(Component):
+    _json_key = "endpoints"
+
     def __init__(self, name, session):
         super().__init__(name, session)
-        self.url = urljoin(BASE_URL, "endpoints")
         self.search_filter = {
             "filter": f'endpoint_id=\'{self.name}\'',
             "page_size": 999999
         }
-        self.info = self.session.get(self.url, params=self.search_filter).json()#["endpoint"][0]
-    
-    def get_endpoint(self):
-        pass
 
 
 class Overlay(Component):
+    _json_key = "overlay_server_pairs"
+
     def __init__(self, name, session):
         super().__init__(name, session)
-        self.url = urljoin(BASE_URL, "overlay_server_pairs")
         self.search_filter = {
             "filter": f'overlay=\'{self.name}\'',
             "page_size": 999999
         }
-        self.info = self.session.get(self.url, params=self.search_filter).json()["overlay_server_pairs"]
 
-    
+
 class Flowclient(Component):
+    _json_key = "flowclients"
+
     def __init__(self, name, session, filter_by):
         super().__init__(name, session)
         self.filter_by = filter_by
-        self.url = urljoin(BASE_URL, "flowclients")
         self.search_filter = {
             "filter": f'{self.filter_by}=\'{self.name}\'',
             "page_size": 999999
         }
-        self.info = self.session.get(self.url,\
-            params=self.search_filter).json()#["leaves"]
 
 
 class Hardware(Component):
+    _json_key = "hardware"
+
     def __init__(self, name, session, filter_by):
         super().__init__(name, session)
-        self.url = urljoin(BASE_URL, "hardware")
         self.filter_by = filter_by
         self.search_filter = {
             "filter": f"{self.filter_by}=\'{self.name}\'",
             "page_size": 999999
         }
-        self.info = self.session.get(self.url, params=self.search_filter).json()#["endpoint"][0]
 
 
 class Appliances(Component):
+    _json_key = "appliances"
+
     def __init__(self, name, session, filter_by):
         super().__init__(name, session)
-        self.url = urljoin(BASE_URL, "appliances")
         self.filter_by = filter_by
         self.search_filter = {
             "filter": f"{self.filter_by}=\'{self.name}\'",
             "page_size": 999999
         }
-        self.info = self.session.get(self.url, params=self.search_filter).json()#["endpoint"][0]
 
