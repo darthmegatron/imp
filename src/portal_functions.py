@@ -63,7 +63,8 @@ class Leaf(Component):
                     file_path.write_text(f"SEND_ADDRESS1={mcast_addr}:{mcast_port}")
                     Path(file_path).chmod(0o664)
             except Exception as e:
-                print(f"Failure: {e}")
+                pass
+                #print(f"Failure: {e}, {decoder['leaf_id']}")
         print(f"Success: {count} decoder confs have been created at {base_dir}")
 
 
