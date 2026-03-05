@@ -19,7 +19,6 @@ class Component:
             return self.session.get(self.url, params=self.search_filter).json()
 
 
-
 class Channel(Component):
     _json_key = "channels"
 
