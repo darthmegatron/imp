@@ -124,6 +124,7 @@ def main():
             get_info(leaf)
 
 
+
     def updateLeaf(leaf_id, key, value):
         payload = {
             "leaf": {
@@ -140,19 +141,22 @@ def main():
         )
     
         if response.status_code == 200:
-            print(f"{leaf_id} updated")
+            print(f"{leaf_id} - {key} updated to {value}")
         else:
             print(f"{leaf_id} update failed")
     
     
-    if "--csv" and "--update-leaf" in argv:
+    if "--update-leaf" and "--csv" in argv:
         file = Path(argv[argv.index("--csv") + 1])
     
         file_contents = file.read_text().split("\n")[1:]
+        file_headers = file.read_text().split("\n")[0].split(",")
+        key = file_headers[1].split("\"")[1].lower()
+    
         for x in file_contents:
             leaf_id = x.split(",")[0].split("\"")[1]
-            updateLeaf(leaf_id, "status", "INACTIVE")
-    
+            value = x.split(",")[1].split("\"")[1]
+            updateLeaf(leaf_id, key, value)
     
     if '--create-decoder-confs' in argv:
         pf.Leaf(argv[argv.index('--create-decoder-confs')+1], request_session, 'endpoint_id').create_decoder_confs()
