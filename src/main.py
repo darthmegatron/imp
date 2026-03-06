@@ -157,8 +157,8 @@ def main():
     if '--create-decoder-confs' in argv:
         pf.Leaf(argv[argv.index('--create-decoder-confs')+1], request_session, 'endpoint_id').create_decoder_confs()
     
-    if '--update-leaf' and not "--csv" in argv:
-        updateLeaf()
+    #if '--update-leaf' and not "--csv" in argv:
+    #    updateLeaf()
 
     if '--verify-decoder-confs' in argv:
         verify_decoder_confs()
