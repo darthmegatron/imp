@@ -13,7 +13,11 @@ imp.py - a generic template for my cool program
 **--create-decoder-confs** ENDPOINT
 :   Create OU decoderX.conf files for all OU decoders at the specified endpoint.
 
+**--update-leaf --csv** CSV_File
+:   Update specific parts of a leaf in a 2 column csv. Column 1 should always be "leaf_id" column 2 should be whatever
+:   value needs to be changed ie. "description", "status", "multicast_handoff" etc.
 # EXAMPLES
+
 Run the program with a specific config:
 
     $ imp.py --create-decoder-confs ltnr-bwi-rcollins
