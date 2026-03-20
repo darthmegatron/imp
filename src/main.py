@@ -125,7 +125,7 @@ def main():
 
 
 
-    def updateLeaf(leaf_id, key, value):
+    def update_leaf(leaf_id, key, value):
         payload = {
             "leaf": {
             "leaf_id": leaf_id,
@@ -146,7 +146,7 @@ def main():
             print(f"{leaf_id} update failed")
     
     
-    if "--update-leaf" and "--csv" in argv:
+    if "--update-leaf" in argv and "--csv" in argv:
         file = Path(argv[argv.index("--csv") + 1])
     
         file_contents = file.read_text().split("\n")[1:]
@@ -156,8 +156,43 @@ def main():
         for x in file_contents:
             leaf_id = x.split(",")[0].split("\"")[1]
             value = x.split(",")[1].split("\"")[1]
-            updateLeaf(leaf_id, key, value)
+            update_leaf(leaf_id, key, value)
     
+
+    def update_flowclient(flowclient_id, key, value):
+        payload = {
+            "flowclient": {
+            "flowclient_id": flowclient_id,
+            key: value
+        },
+        "update_mask": key
+        }
+    
+        response = request_session.patch(
+            urljoin(pf.Component.BASE_URL, f"flowclients/{flowclient_id}"),
+            json=payload,
+            timeout=30
+        )
+    
+        if response.status_code == 200:
+            print(f"{flowclient_id} - {key} updated to {value}")
+        else:
+            print(f"{flowclient_id} update failed")
+    
+    
+    if "--update-flowclient" in argv and "--csv" in argv:
+        file = Path(argv[argv.index("--csv") + 1])
+    
+        file_contents = file.read_text().split("\n")[1:]
+        file_headers = file.read_text().split("\n")[0].split(",")
+        key = file_headers[1].split("\"")[1].lower()
+    
+        for x in file_contents:
+            flowclient_id = x.split(",")[0].split("\"")[1]
+            value = x.split(",")[1].split("\"")[1]
+            update_flowclient(flowclient_id, key, value)
+    
+
     if '--create-decoder-confs' in argv:
         pf.Leaf(argv[argv.index('--create-decoder-confs')+1], request_session, 'endpoint_id').create_decoder_confs()
     
