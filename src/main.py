@@ -178,6 +178,57 @@ def main():
             print(f"{flowclient_id} - {key} updated to {value}")
         else:
             print(f"{flowclient_id} update failed")
+
+
+    def rename_leaf(old_leaf_id, new_leaf_id):
+        payload = {
+            "old_leaf_id": old_leaf_id,
+            "new_leaf_id": new_leaf_id,
+            "update_mask": "leaf_id"
+        }
+    
+        response = request_session.post(
+            url = pf.Component.BASE_URL + "leaves:rename",
+            json=payload,
+            timeout=30
+        )
+        
+        if response.status_code == 200:
+            print(f"{old_leaf_id} - renamed updated to {new_leaf_id}")
+        else:
+            print(f"{old_leaf_id} rename failed")
+
+
+    def get_bookings(booking_id):
+        """payload = {
+            "booking_id":booking_id
+        }"""
+
+        response = request_session.get(
+            #urljoin(pf.Component.BASE_URL, f"booking_details/{booking_id}"),
+            urljoin(pf.Component.BASE_URL, f"bookings"),
+            #json=payload,
+            timeout=30
+            ).json()["bookings"]
+        
+        print(response)
+
+
+    if "--get-bookings" in argv:
+        #get_bookings(argv[argv.index("--get-booking") + 1])
+        get_bookings(argv[argv.index("--get-bookings")])
+
+
+    if "--rename-leaf" in argv and "--csv" in argv:
+        file = Path(argv[argv.index("--csv") + 1])
+    
+        file_contents = file.read_text().split("\n")[1:]
+        file_headers = file.read_text().split("\n")[0].split(",")
+    
+        for x in file_contents:
+            old_leaf_id = x.split(",")[0].split("\"")[1]
+            new_leaf_id = x.split(",")[1].split("\"")[1]
+            rename_leaf(old_leaf_id, new_leaf_id)
     
     
     if "--update-flowclient" in argv and "--csv" in argv:
@@ -191,7 +242,7 @@ def main():
             flowclient_id = x.split(",")[0].split("\"")[1]
             value = x.split(",")[1].split("\"")[1]
             update_flowclient(flowclient_id, key, value)
-    
+
 
     if '--create-decoder-confs' in argv:
         pf.Leaf(argv[argv.index('--create-decoder-confs')+1], request_session, 'endpoint_id').create_decoder_confs()
