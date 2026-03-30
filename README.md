@@ -21,7 +21,7 @@ imp.py - a generic template for my cool program
 :   Update specific parts of a flowclient in a 2 column csv. Column 1 should always be "flowclient_id" column 2 should be whatever
 :   value needs to be changed ie. "description", "status", "multicast_handoff" etc same as --update-leaf but for flowclients.
 
-**--rename-leaf --csv CSV_FILE**
+**--rename-leaf --csv** CSV_FILE
 :   Rename a leaf in the portal. Column 1 should be the current "leaf_id" to be changed. Column 2 should be the new "leaf_id"
 # EXAMPLES
 
