@@ -35,4 +35,4 @@ Run the program with a specific config:
 See GitHub Issues: <https://github.com/darthmegatron/imp/issues>
 
 # AUTHOR
-Robert Collins <randomhuman-rc@proton.me>
+Robert Collins <github.conch149@passmail.com>
